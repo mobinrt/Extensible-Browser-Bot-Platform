@@ -1,0 +1,106 @@
+name: browser-bot-platform
+services:
+  postgres:
+    image: postgres:16.9-alpine
+    environment:
+      POSTGRES_DB: bots
+      POSTGRES_USER: bots
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bots -d bots"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+    restart: unless-stopped
+
+  migrate:
+    build: ./backend
+    command: ["alembic", "upgrade", "head"]
+    environment: &backend-env
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      POSTGRES_HOST: postgres
+      SELENIUM_URL: http://selenium:4444/wd/hub
+      DEMO_URL: https://demo.arcaptcha.co
+      DEMO_USERNAME: ${DEMO_USERNAME:-}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:-}
+      RUN_TIMEOUT_SECONDS: ${RUN_TIMEOUT_SECONDS:-180}
+      MANUAL_TIMEOUT_SECONDS: ${MANUAL_TIMEOUT_SECONDS:-90}
+      LEASE_SECONDS: ${LEASE_SECONDS:-45}
+      HEARTBEAT_SECONDS: ${HEARTBEAT_SECONDS:-10}
+      ARCAPTCHA_DIAGNOSTICS_ENABLED: ${ARCAPTCHA_DIAGNOSTICS_ENABLED:-false}
+      ARCAPTCHA_DIAGNOSTICS_DIRECTORY: /srv/diagnostics
+      SELENIUM_WAIT_SECONDS: ${SELENIUM_WAIT_SECONDS:-12}
+      ARCAPTCHA_CHECKBOX_SELECTOR: "${ARCAPTCHA_CHECKBOX_SELECTOR:-#arc-checkbox, #ar-checkbox}"
+      ARCAPTCHA_USERNAME_SELECTOR: ${ARCAPTCHA_USERNAME_SELECTOR:-#email}
+      ARCAPTCHA_PASSWORD_SELECTOR: ${ARCAPTCHA_PASSWORD_SELECTOR:-#password}
+      ARCAPTCHA_SUBMIT_SELECTOR: ${ARCAPTCHA_SUBMIT_SELECTOR:-form button}
+      ALLOWED_ORIGINS: http://localhost:8080
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
+  selenium:
+    image: selenium/standalone-chrome:4.51.0-20261010
+    platform: linux/amd64
+    shm_size: 2gb
+    environment:
+      SE_NODE_MAX_SESSIONS: 1
+      SE_NODE_SESSION_TIMEOUT: 240
+      SE_SESSION_REQUEST_TIMEOUT: 30
+      SE_START_XVFB: "true"
+      SE_VNC_PASSWORD: ${NOVNC_PASSWORD:?Set NOVNC_PASSWORD in .env}
+    ports:
+      - "127.0.0.1:${NOVNC_PORT:-7900}:7900"
+    healthcheck:
+      test: ["CMD", "/opt/bin/check-grid.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  api:
+    build: ./backend
+    environment: *backend-env
+    ports:
+      - "127.0.0.1:${API_PORT:-8000}:8000"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/health/ready', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  worker:
+    build: ./backend
+    command: ["python", "-m", "app.worker.main"]
+    volumes:
+      - arcaptcha_diagnostics:/srv/diagnostics
+    environment: *backend-env
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      selenium:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_NOVNC_URL: "http://localhost:${NOVNC_PORT:-7900}"
+    ports:
+      - "127.0.0.1:${WEB_PORT:-8080}:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  arcaptcha_diagnostics:
