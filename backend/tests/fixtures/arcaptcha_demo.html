@@ -1,0 +1,28 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Deterministic Fixture</title></head><body>
+<form>
+<div class="arcaptcha-vue"><div data-widget-id="fixture-widget">
+<div id="ar-checkbox" aria-label="I'm not robot" tabindex="0">I'm not robot
+<div id="input-checkbox"><input type="checkbox" style="display:none"></div></div>
+<input type="hidden" id="arcaptcha-token" value="">
+</div></div>
+<input name="challenge_id" type="hidden" id="challenge" value="">
+<label>Username<input id="email" type="email"></label>
+<label>Password<input id="password" type="password"></label>
+<button type="button" id="login">Login</button>
+</form>
+<script>
+let challengeID = null;
+window.arcaptcha = {widgets:{'fixture-widget':{getChallengeID:()=>challengeID}}};
+document.querySelector('#ar-checkbox').onclick = () => {
+ setTimeout(()=>{
+  challengeID='__FIXTURE_CHALLENGE_ID__';
+  document.querySelector('#input-checkbox input').checked=true;
+  document.querySelector('#arcaptcha-token').value='fixture-token-never-persist';
+ },100);
+};
+document.querySelector('#login').onclick = async () => {
+ await fetch('/api/login'+location.search,{method:'POST',headers:{'Content-Type':'application/json'},
+ body:JSON.stringify({username:document.querySelector('#email').value,password:document.querySelector('#password').value,
+ captcha_token:document.querySelector('#arcaptcha-token').value})});
+};
+</script></body></html>
