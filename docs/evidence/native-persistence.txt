@@ -1,0 +1,5 @@
+waiting for server to shut down.... done
+server stopped
+waiting for server to start.... done
+server started
+{"retained_rows": 5, "statuses": ["BLOCKED", "SUCCEEDED", "BLOCKED", "SUCCEEDED", "SUCCEEDED"], "same_ids_statuses_codes_and_id_presence": true}

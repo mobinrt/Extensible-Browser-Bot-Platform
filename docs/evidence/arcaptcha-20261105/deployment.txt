@@ -1,0 +1,8 @@
+2026-11-05: worker build succeeded using the existing PIP_INDEX_URL build argument and public mirror.
+Image: sha256:05561a41cf8600a627b23ec9c972074308df244220fe6ffda63b5d344200e44c
+Zero active runs before worker recreation.
+diagnostics_default=false; private_directory_writable=true
+Source and deployed SHA256:
+3532792f2578717dae8e75f2c720b7389e98e47fce92148749a1d316522a587e diagnostics.py
+1d2d4ecce9ce840550d1875f85cbfbae06224de752e4db6f8d81356d01dde5cd page.py
+API readiness: ready.

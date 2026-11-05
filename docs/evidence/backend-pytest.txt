@@ -1,0 +1,9 @@
+...............ss....................................................... [ 85%]
+............                                                             [100%]
+=============================== warnings summary ===============================
+tests/test_api_integration.py::test_rest_api_create_history_and_detail
+  /home/mobin/WorkSpace/Project/bot-research-engineer-source/bot-research-engineer/.venv/lib/python3.12/site-packages/starlette/testclient.py:37: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+82 passed, 2 skipped, 1 warning in 16.13s

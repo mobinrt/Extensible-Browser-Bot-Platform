@@ -1,0 +1,184 @@
+[
+  {
+    "case": "A",
+    "outcome": "NO_REJECTION_OBSERVED",
+    "timings_ms": {
+      "PAGE_LOADED": 3413.639,
+      "WIDGET_DETECTED": 3437.192,
+      "RUN_FINISHED": 8768.177
+    },
+    "click_to_block_ms": null,
+    "create_requests": 0,
+    "answer_requests": 0,
+    "login_requests": 0,
+    "http_statuses": [
+      {
+        "endpoint": "document",
+        "http_status": 200,
+        "request_index": 1,
+        "occurred_elapsed_ms": 855.316
+      },
+      {
+        "endpoint": "widget_script",
+        "http_status": 200,
+        "request_index": 4,
+        "occurred_elapsed_ms": 1986.295
+      },
+      {
+        "endpoint": "widget_script",
+        "http_status": 200,
+        "request_index": 5,
+        "occurred_elapsed_ms": 2601.845
+      },
+      {
+        "endpoint": "widget_script",
+        "http_status": 200,
+        "request_index": 7,
+        "occurred_elapsed_ms": 3261.971
+      }
+    ],
+    "resource_failures": 0,
+    "severe_console_count": 0
+  },
+  {
+    "case": "B",
+    "outcome": "SITE_REJECTION",
+    "timings_ms": {
+      "PAGE_LOADED": 6225.432,
+      "WIDGET_DETECTED": 6253.262,
+      "BEFORE_CHECKBOX_CLICK": 6312.132,
+      "AFTER_CHECKBOX_CLICK": 6338.947,
+      "SITE_BLOCK_DETECTED": 7484.585,
+      "RUN_FINISHED": 7558.755
+    },
+    "click_to_block_ms": 1145.638,
+    "create_requests": 1,
+    "answer_requests": 0,
+    "login_requests": 0,
+    "http_statuses": [
+      {
+        "endpoint": "document",
+        "http_status": 200,
+        "request_index": 1,
+        "occurred_elapsed_ms": 2175.511
+      },
+      {
+        "endpoint": "widget_script",
+        "http_status": 200,
+        "request_index": 4,
+        "occurred_elapsed_ms": 4775.828
+      },
+      {
+        "endpoint": "widget_script",
+        "http_status": 200,
+        "request_index": 5,
+        "occurred_elapsed_ms": 5293.705
+      },
+      {
+        "endpoint": "widget_script",
+        "http_status": 200,
+        "request_index": 7,
+        "occurred_elapsed_ms": 5653.181
+      },
+      {
+        "endpoint": "challenge_create",
+        "http_status": 201,
+        "request_index": 21,
+        "occurred_elapsed_ms": 7345.931
+      }
+    ],
+    "resource_failures": 0,
+    "severe_console_count": 1
+  },
+  {
+    "case": "C",
+    "outcome": "NO_REJECTION_OBSERVED",
+    "timings_ms": {
+      "PAGE_LOADED": 3970.412,
+      "WIDGET_DETECTED": 3993.525,
+      "RUN_FINISHED": 9152.326
+    },
+    "click_to_block_ms": null,
+    "create_requests": 0,
+    "answer_requests": 0,
+    "login_requests": 0,
+    "http_statuses": [
+      {
+        "endpoint": "document",
+        "http_status": 200,
+        "request_index": 1,
+        "occurred_elapsed_ms": 899.321
+      },
+      {
+        "endpoint": "widget_script",
+        "http_status": 200,
+        "request_index": 4,
+        "occurred_elapsed_ms": 1681.154
+      },
+      {
+        "endpoint": "widget_script",
+        "http_status": 200,
+        "request_index": 5,
+        "occurred_elapsed_ms": 2157.209
+      },
+      {
+        "endpoint": "widget_script",
+        "http_status": 200,
+        "request_index": 7,
+        "occurred_elapsed_ms": 2359.586
+      }
+    ],
+    "resource_failures": 0,
+    "severe_console_count": 0
+  },
+  {
+    "case": "D",
+    "outcome": "SITE_REJECTION",
+    "timings_ms": {
+      "PAGE_LOADED": 4844.975,
+      "WIDGET_DETECTED": 4866.529,
+      "BEFORE_CHECKBOX_CLICK": 4907.076,
+      "AFTER_CHECKBOX_CLICK": 4931.677,
+      "SITE_BLOCK_DETECTED": 6144.462,
+      "RUN_FINISHED": 6220.783
+    },
+    "click_to_block_ms": 1212.785,
+    "create_requests": 1,
+    "answer_requests": 0,
+    "login_requests": 0,
+    "http_statuses": [
+      {
+        "endpoint": "document",
+        "http_status": 200,
+        "request_index": 1,
+        "occurred_elapsed_ms": 409.472
+      },
+      {
+        "endpoint": "widget_script",
+        "http_status": 200,
+        "request_index": 4,
+        "occurred_elapsed_ms": 1937.908
+      },
+      {
+        "endpoint": "widget_script",
+        "http_status": 200,
+        "request_index": 5,
+        "occurred_elapsed_ms": 2787.12
+      },
+      {
+        "endpoint": "widget_script",
+        "http_status": 200,
+        "request_index": 7,
+        "occurred_elapsed_ms": 2998.387
+      },
+      {
+        "endpoint": "challenge_create",
+        "http_status": 201,
+        "request_index": 21,
+        "occurred_elapsed_ms": 5877.729
+      }
+    ],
+    "resource_failures": 0,
+    "severe_console_count": 1
+  }
+]
