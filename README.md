@@ -12,6 +12,20 @@ consecutive genuine logins with **human CAPTCHA completion**. UC Headless receiv
 automate CAPTCHA solving or guarantee future acceptance.
 [Findings and sanitized evidence](docs/ARCAPTCHA_FINDINGS.md).
 
+## Screenshots
+
+**Run console** — Select a bot and browser mode, then monitor execution from the dashboard.
+
+![BotLab run console](docs/images/run-console.png)
+
+**Execution history** — Inspect persisted runs, statuses and captured challenge IDs.
+
+![BotLab execution history](docs/images/execution-history.png)
+
+**Headful CAPTCHA** — The UC browser displays a genuine challenge through noVNC; CAPTCHA completion is manual.
+
+![Human-assisted ARCaptcha challenge in noVNC](docs/images/headful-captcha.png)
+
 ## Quick start
 
 Use Docker Engine and Compose v2+, Linux amd64 (the browser image targets amd64),
