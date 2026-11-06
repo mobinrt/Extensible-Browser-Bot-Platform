@@ -60,9 +60,9 @@ docker compose exec -e ARCAPTCHA_DIAGNOSTICS_ENABLED=true worker \
 ```
 
 That command uses the default Grid worker. In a UC container use
-`/opt/bot-venv/bin/python` instead of `python`; the diagnostic still uses Grid. Production UC
-worker diagnostics instead identify the selected backend. Detailed provenance and
-failure boundaries are described in [ARCHITECTURE](ARCHITECTURE.md).
+`/opt/bot-venv/bin/python` instead of `python`; the corrected diagnostic selects UC
+when `BROWSER_BACKEND=undetected-chrome`. It does not persist challenge IDs.
+Detailed provenance and failure boundaries are described in [ARCHITECTURE](ARCHITECTURE.md).
 
 Only sanitized run metadata, diagnostic summaries and one success trace are retained.
 No profiles, credentials, cookies, tokens or raw network captures are submission evidence.

@@ -12,6 +12,7 @@ from app.core.config import Settings, get_settings
 from app.domain.contracts import BotRunError, BrowserMode
 from app.infrastructure.browser.diagnostics import RunDiagnostics
 from app.infrastructure.browser.selenium_factory import SeleniumBrowserFactory
+from app.infrastructure.browser.undetected_factory import UndetectedChromeFactory
 
 
 def classify(error: Exception) -> str:
@@ -40,10 +41,21 @@ def observe_case(settings: Settings, mode: BrowserMode, click: bool, seconds: fl
     driver = page = None
     outcome = "NO_REJECTION_OBSERVED"
     try:
-        factory = SeleniumBrowserFactory(settings.selenium_url)
+        factory = (
+            UndetectedChromeFactory(settings.chrome_binary, settings.chromedriver_binary)
+            if settings.browser_backend == "undetected-chrome"
+            else SeleniumBrowserFactory(settings.selenium_url)
+        )
+
         factory.capture_console = True
         driver = factory.start(mode)
-        diagnostics.browser_created(driver, settings.selenium_url)
+
+        diagnostics.browser_created(
+            driver,
+            settings.selenium_url,
+            settings.browser_backend,
+        )
+        
         page = ArcaptchaPage(driver, settings, checkpoint=diagnostics.checkpoint)
         page.open()
         page.wait_for_widget()

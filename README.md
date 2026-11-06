@@ -36,11 +36,32 @@ execution have not been verified.
 cp .env.example .env
 # Set POSTGRES_PASSWORD and an at-most-8-character NOVNC_PASSWORD.
 # Keep the public demo credentials demo/demo.
-docker compose config --quiet
+```
+
+Choose **one** deployment command:
+
+**Standard Selenium Grid (default):** suitable for ordinary browser runs; live
+ARCaptcha requests have been blocked in observed tests.
+
+```bash
 docker compose up -d --build
+```
+
+**UC worker (recommended for the ARCaptcha demo):** the observed successful flow
+uses **Headful** mode with manual CAPTCHA completion. UC Headless has been blocked.
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.uc.yml up -d --build
+```
+
+After either command:
+
+```bash
 docker compose ps
 curl --fail http://localhost:8000/api/v1/health/ready
 ```
+
+The deployment selects Grid or UC; the UI selects Headful or Headless **per run**.
 
 Default addresses:
 
@@ -80,18 +101,22 @@ database unavailability returns 503. Requests cannot supply target URLs or crede
 
 ## Select the UC backend
 
-The optional image contains local Chrome/ChromeDriver, Python 3.12, UC, Xvfb, VNC and
-noVNC. Supervisor starts the worker with `/opt/bot-venv/bin/python` alongside the
-viewer processes. UC launches Chrome locally; it does not run through Grid.
+**Without `docker-compose.uc.yml`:** the worker uses remote Selenium Grid; view
+Headful sessions at port 7900. **With the UC overlay:** the worker instead runs
+local undetected-chromedriver; view its Headful session at port 7901. The Grid
+service can remain running, but the worker uses only the selected backend.
+
+The UC image includes Chrome/ChromeDriver, Python 3.12, Xvfb and noVNC. Supervisor
+runs the worker through `/opt/bot-venv/bin/python` along with the viewer services.
+To check the UC deployment:
 
 ```bash
 docker compose -f docker-compose.yml -f docker-compose.uc.yml config --quiet
-docker compose -f docker-compose.yml -f docker-compose.uc.yml up -d --build
-docker compose exec worker supervisorctl status bot-worker xvfb vnc novnc
+docker compose -f docker-compose.yml -f docker-compose.uc.yml exec worker \
+  supervisorctl status bot-worker xvfb vnc novnc
 ```
 
-The overlay sets `BROWSER_BACKEND=undetected-chrome` and builds console viewer links
-for port 7901. Grid remains available on 7900. To return to standard Grid:
+To switch an existing UC deployment back to standard Grid:
 
 ```bash
 docker compose up -d --build worker frontend
