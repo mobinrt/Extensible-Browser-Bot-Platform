@@ -6,7 +6,7 @@ COPY pyproject.toml requirements.lock ./
 COPY app ./app
 COPY migrations ./migrations
 COPY alembic.ini ./
-ARG PIP_INDEX_URL=https://pypi.org/simple
+ARG PIP_INDEX_URL=https://mirrors.aliyun.com/pypi/simple/
 ENV PIP_INDEX_URL=${PIP_INDEX_URL}
 RUN pip install \
     --timeout 120 \

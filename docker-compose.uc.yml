@@ -1,0 +1,21 @@
+# Explicit opt-in. UC owns Chrome locally and does not use RemoteWebDriver/Grid.
+services:
+  worker:
+    image: browser-bot-platform-worker-uc:local
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.uc
+    command: ["/opt/bin/entry_point.sh"]
+    environment:
+      BROWSER_BACKEND: undetected-chrome
+      CHROME_BINARY: /usr/bin/google-chrome
+      CHROMEDRIVER_BINARY: /usr/bin/chromedriver
+      SE_START_XVFB: "true"
+      SE_VNC_PASSWORD: ${NOVNC_PASSWORD:?Set NOVNC_PASSWORD in .env}
+    shm_size: 2gb
+    ports:
+      - "127.0.0.1:${UC_NOVNC_PORT:-7901}:7900"
+  frontend:
+    build:
+      args:
+        VITE_NOVNC_URL: "http://localhost:${UC_NOVNC_PORT:-7901}"

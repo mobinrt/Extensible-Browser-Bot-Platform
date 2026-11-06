@@ -162,6 +162,22 @@ def test_diagnostics_disabled_by_default(tmp_path):
     assert not list(tmp_path.iterdir())
 
 
+def test_local_backend_diagnostics_do_not_claim_grid_version(tmp_path, monkeypatch):
+    from app.infrastructure.browser import diagnostics as module
+    monkeypatch.setattr(module, "grid_version", lambda _: pytest.fail("local UC is not Grid"))
+    monkeypatch.setattr(module, "dns_result", lambda host: {"host": host, "resolved": True})
+    driver = Mock(capabilities={"browserName": "chrome", "browserVersion": "155.0.8059.79",
+                              "chrome": {"chromedriverVersion": "155.0.8059.79"}})
+    driver.execute_cdp_cmd.return_value = {"arguments": []}
+    diag = RunDiagnostics(tmp_path, uuid4(), "HEADFUL")
+    diag.browser_created(driver, "http://unused", "undetected-chrome")
+    diag.finish("SUCCEEDED")
+    rows = [json.loads(line) for line in diag.path.read_text().splitlines()]
+    env = next(row for row in rows if row["checkpoint"] == "ENVIRONMENT")
+    assert env["browser_backend"] == "undetected-chrome"
+    assert env["grid_version"] == "not_applicable"
+
+
 @pytest.mark.parametrize("error,outcome", [(TimeoutException(), "TIMEOUT"),
                                             (WebDriverException(), "SELENIUM_ERROR"),
                                             (BotRunError("CAPTCHA_SITE_BLOCKED", "captcha", RunStatus.BLOCKED), "SITE_REJECTION")])

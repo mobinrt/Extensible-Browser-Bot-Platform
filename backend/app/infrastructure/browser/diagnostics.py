@@ -138,7 +138,8 @@ class RunDiagnostics:
         except OSError:
             logging.getLogger("worker").warning("arcaptcha_diagnostics_artifact_unavailable")
 
-    def browser_created(self, driver, selenium_url: str) -> None:
+    def browser_created(self, driver, selenium_url: str,
+                        browser_backend: str = "selenium-grid") -> None:
         self.driver = driver
         caps = driver.capabilities
         self.browser = caps.get("browserName") if caps.get("browserName") in {"chrome", "chromium", "firefox", "msedge"} else "unknown"
@@ -157,7 +158,9 @@ class RunDiagnostics:
         self.checkpoint("BROWSER_CREATED", {"stage": "browser"})
         # Environment is constructed here from a fixed schema, never serialized caps.
         self._write("ENVIRONMENT", {
-            "grid_version": grid_version(selenium_url), "chromedriver_version": driver_version,
+            "browser_backend": browser_backend,
+            "grid_version": grid_version(selenium_url) if browser_backend == "selenium-grid" else "not_applicable",
+            "chromedriver_version": driver_version,
             "browser_driver_major_match": driver_version.split(".")[0] == self.version.split(".")[0] if driver_version != "unknown" else None,
             "platform": caps.get("platformName") if caps.get("platformName") in {"linux", "windows", "mac"} else "unknown",
             "page_load_strategy": caps.get("pageLoadStrategy") if caps.get("pageLoadStrategy") in {"normal", "eager", "none"} else "unknown",

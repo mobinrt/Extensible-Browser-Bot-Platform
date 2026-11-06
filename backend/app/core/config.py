@@ -1,5 +1,6 @@
 from functools import lru_cache
 from pathlib import Path
+from typing import Literal
 
 from pydantic import Field, SecretStr, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -16,6 +17,9 @@ class Settings(BaseSettings):
     postgres_user: str = "bots"
     postgres_password: SecretStr = SecretStr("")
     selenium_url: str = "http://localhost:4444/wd/hub"
+    browser_backend: Literal["selenium-grid", "undetected-chrome"] = "selenium-grid"
+    chrome_binary: Path = Path("/usr/bin/google-chrome")
+    chromedriver_binary: Path = Path("/usr/local/bin/chromedriver")
     demo_url: str = "https://demo.arcaptcha.co"
     demo_username: str = ""
     demo_password: SecretStr = SecretStr("")
@@ -25,7 +29,6 @@ class Settings(BaseSettings):
     run_timeout_seconds: int = Field(default=180, ge=10, le=3600)
     manual_timeout_seconds: int = Field(default=90, ge=5, le=900)
     selenium_wait_seconds: int = Field(default=12, ge=1, le=120)
-    # Confirmed from the demo bundle; metadata/verification use read-only adapters.
     arcaptcha_checkbox_selector: str = "#arc-checkbox, #ar-checkbox"
     # Deprecated legacy fields are accepted for compatibility, never trusted as evidence.
     arcaptcha_challenge_selector: str = ""

@@ -20,10 +20,17 @@ from app.infrastructure.browser.selenium_factory import SeleniumBrowserFactory
 @pytest.fixture
 def driver():
     url = os.getenv("SELENIUM_TEST_URL")
-    if not url:
+    local_uc = os.getenv("TEST_BROWSER_BACKEND") == "undetected-chrome"
+    if not url and not local_uc:
         pytest.skip("requires SELENIUM_TEST_URL")
     mode = BrowserMode(os.getenv("BROWSER_TEST_MODE", "HEADLESS"))
-    driver = SeleniumBrowserFactory(url).start(mode)
+    if local_uc:
+        from app.infrastructure.browser.undetected_factory import UndetectedChromeFactory
+        factory = UndetectedChromeFactory(Path(os.environ["CHROME_BINARY"]),
+                                          Path(os.environ["CHROMEDRIVER_BINARY"]))
+        driver = factory.start(mode)
+    else:
+        driver = SeleniumBrowserFactory(url).start(mode)
     try:
         yield driver
     finally:

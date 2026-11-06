@@ -1,13 +1,15 @@
 **/__pycache__
 **/.pytest_cache
 **/.mypy_cache
+**/.ruff_cache
 **/.venv
+**/*.egg-info
 **/node_modules
 **/dist
 **/.git
 **/.env
 **/.env.*
 **/*.pyc
-!**/.env.example
-
 **/diagnostics
+**/downloaded_files
+!**/.env.example

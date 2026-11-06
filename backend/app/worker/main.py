@@ -17,6 +17,7 @@ from app.core.logging import configure_logging
 from app.domain.contracts import BotContext, BotRunError, BrowserMode, RunStatus
 from app.infrastructure.browser.diagnostics import RunDiagnostics
 from app.infrastructure.browser.selenium_factory import SeleniumBrowserFactory
+from app.infrastructure.browser.undetected_factory import UndetectedChromeFactory
 from app.infrastructure.database.repository import RunRepository
 from app.infrastructure.database.session import SessionLocal
 
@@ -74,12 +75,14 @@ def execute(run_id: UUID, bot_id: str, mode: BrowserMode, worker_id: str) -> Non
     metadata = None
     try:
         check_deadline()
-        factory = SeleniumBrowserFactory(s.selenium_url)
+        factory = (UndetectedChromeFactory(s.chrome_binary, s.chromedriver_binary)
+                   if s.browser_backend == "undetected-chrome"
+                   else SeleniumBrowserFactory(s.selenium_url))
         if diagnostics is not None:
             factory.capture_console = True
         driver = factory.start(mode)
         if diagnostics is not None:
-            diagnostics.browser_created(driver, s.selenium_url)
+            diagnostics.browser_created(driver, s.selenium_url, s.browser_backend)
         check_deadline()
         bot = build_registry().get(bot_id)
         result = bot.run(BotContext(mode=mode, driver=driver, deadline=deadline,
@@ -116,7 +119,7 @@ def execute(run_id: UUID, bot_id: str, mode: BrowserMode, worker_id: str) -> Non
         try:
             if driver is not None:
                 driver.quit()
-        except (WebDriverException, HTTPError):
+        except (WebDriverException, HTTPError, OSError):
             log.warning("browser_cleanup_failed")
         stop.set()
         thread.join(timeout=2)

@@ -1,0 +1,129 @@
+{
+  "date": "2026-11-06",
+  "source": "Read-only export of application PostgreSQL runs; no live runs repeated during cleanup.",
+  "backend": "undetected-chrome",
+  "captcha_completion": "Human-assisted, as confirmed by the operator; no automated CAPTCHA solving.",
+  "limits": "Rows record mode and verifier result, not historical image identity or human input events.",
+  "runs": [
+    {
+      "run_id": "34da8fd0-6348-4361-8407-6322d68e5d76",
+      "bot_id": "arcaptcha-demo",
+      "browser_mode": "HEADLESS",
+      "status": "BLOCKED",
+      "created_at": "2026-11-06T10:09:27.033412+00:00",
+      "challenge_id": null,
+      "error_code": "CAPTCHA_SITE_BLOCKED",
+      "failure_stage": "captcha",
+      "result_metadata": null
+    },
+    {
+      "run_id": "c24a3452-5644-4621-ad28-f50652ededae",
+      "bot_id": "arcaptcha-demo",
+      "browser_mode": "HEADFUL",
+      "status": "SUCCEEDED",
+      "created_at": "2026-11-06T10:09:33.865166+00:00",
+      "challenge_id": "040679884412324058404125191258",
+      "error_code": null,
+      "failure_stage": null,
+      "result_metadata": {
+        "evidence": "browser_login_http_200_expected_msg",
+        "challenge_source": "widget_getChallengeID"
+      }
+    },
+    {
+      "run_id": "4425bdf9-284e-4a49-850f-760d573f3ad9",
+      "bot_id": "arcaptcha-demo",
+      "browser_mode": "HEADFUL",
+      "status": "SUCCEEDED",
+      "created_at": "2026-11-06T10:09:52.959501+00:00",
+      "challenge_id": "953203366829371018244804123895",
+      "error_code": null,
+      "failure_stage": null,
+      "result_metadata": {
+        "evidence": "browser_login_http_200_expected_msg",
+        "challenge_source": "widget_getChallengeID"
+      }
+    },
+    {
+      "run_id": "5913034a-8cb0-4b98-84ce-1c456fa55f0f",
+      "bot_id": "arcaptcha-demo",
+      "browser_mode": "HEADFUL",
+      "status": "SUCCEEDED",
+      "created_at": "2026-11-06T10:10:03.189733+00:00",
+      "challenge_id": "875264924526066513125863790595",
+      "error_code": null,
+      "failure_stage": null,
+      "result_metadata": {
+        "evidence": "browser_login_http_200_expected_msg",
+        "challenge_source": "widget_getChallengeID"
+      }
+    },
+    {
+      "run_id": "e0539acc-265f-45d3-8da1-5aee961ce3fb",
+      "bot_id": "arcaptcha-demo",
+      "browser_mode": "HEADFUL",
+      "status": "SUCCEEDED",
+      "created_at": "2026-11-06T10:10:17.603269+00:00",
+      "challenge_id": "532322966120210779112379713533",
+      "error_code": null,
+      "failure_stage": null,
+      "result_metadata": {
+        "evidence": "browser_login_http_200_expected_msg",
+        "challenge_source": "widget_getChallengeID"
+      }
+    },
+    {
+      "run_id": "1166cbc8-ba63-483a-a93e-80659af69875",
+      "bot_id": "arcaptcha-demo",
+      "browser_mode": "HEADFUL",
+      "status": "SUCCEEDED",
+      "created_at": "2026-11-06T10:10:28.542178+00:00",
+      "challenge_id": "203923740289441806463465429079",
+      "error_code": null,
+      "failure_stage": null,
+      "result_metadata": {
+        "evidence": "browser_login_http_200_expected_msg",
+        "challenge_source": "widget_getChallengeID"
+      }
+    },
+    {
+      "run_id": "9a204c6a-0499-420a-a05e-7b46a2bd8680",
+      "bot_id": "arcaptcha-demo",
+      "browser_mode": "HEADFUL",
+      "status": "SUCCEEDED",
+      "created_at": "2026-11-06T10:10:37.890374+00:00",
+      "challenge_id": "258012113581013269453822206646",
+      "error_code": null,
+      "failure_stage": null,
+      "result_metadata": {
+        "evidence": "browser_login_http_200_expected_msg",
+        "challenge_source": "widget_getChallengeID"
+      }
+    },
+    {
+      "run_id": "f72f53b9-3e78-4ca2-b1d4-c44207935b7c",
+      "bot_id": "arcaptcha-demo",
+      "browser_mode": "HEADFUL",
+      "status": "SUCCEEDED",
+      "created_at": "2026-11-06T10:10:49.709324+00:00",
+      "challenge_id": "827174995459557389121294697188",
+      "error_code": null,
+      "failure_stage": null,
+      "result_metadata": {
+        "evidence": "browser_login_http_200_expected_msg",
+        "challenge_source": "widget_getChallengeID"
+      }
+    },
+    {
+      "run_id": "79bd650b-1985-4262-86c3-18fb0b2eb293",
+      "bot_id": "arcaptcha-demo",
+      "browser_mode": "HEADLESS",
+      "status": "BLOCKED",
+      "created_at": "2026-11-06T10:12:31.196658+00:00",
+      "challenge_id": null,
+      "error_code": "CAPTCHA_SITE_BLOCKED",
+      "failure_stage": "captcha",
+      "result_metadata": null
+    }
+  ]
+}

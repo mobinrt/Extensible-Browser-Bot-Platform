@@ -12,6 +12,13 @@ def test_config_defaults_and_secret_str():
     assert "private-text" not in repr(settings)
     assert settings.demo_password.get_secret_value() == "private-text"
     assert settings.arcaptcha_success_selector == ""
+    assert settings.browser_backend == "selenium-grid"
+
+
+def test_optional_browser_backend_is_explicit_and_validated():
+    assert Settings(database_url=DB, browser_backend="undetected-chrome").browser_backend == "undetected-chrome"
+    with pytest.raises(ValidationError):
+        Settings(database_url=DB, browser_backend="playwright")
 
 
 @pytest.mark.parametrize("url", ["https://evil.example", "http://demo.arcaptcha.co"])

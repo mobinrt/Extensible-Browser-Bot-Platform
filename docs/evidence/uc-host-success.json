@@ -1,0 +1,261 @@
+{
+  "candidate": "undetected-chromedriver",
+  "target": "LIVE_DEMO",
+  "requested_mode": "HEADFUL",
+  "started_utc": "2026-11-05T20:44:39.646641+00:00",
+  "browser_started": true,
+  "widget_ready": true,
+  "checkbox_clicked": true,
+  "site_rejection": false,
+  "challenge_id_observed": true,
+  "login_succeeded": true,
+  "outcome": "SUCCESS",
+  "authorization": "2026-11-06 user request: one initial live attempt per candidate",
+  "packages": {
+    "seleniumbase": "4.57.1",
+    "undetected-chromedriver": "3.5.5",
+    "playwright": "1.56.0",
+    "selenium": "4.52.0"
+  },
+  "environment": {
+    "browser_version": "156.0.8078.79",
+    "driver_version": "156.0.8078.80",
+    "platform": "",
+    "accept_insecure_certs": false,
+    "page_load_strategy": "normal",
+    "proxy_configured": false,
+    "websocket_capability": false,
+    "selenium": "4.52.0",
+    "hardware_concurrency": 16,
+    "language": "en-US",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "secure_context": true,
+    "timezone": "Asia/Tehran",
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "viewport": [
+      1854,
+      905
+    ],
+    "webdriver": false,
+    "webgl": true
+  },
+  "observed_launch_flags": {
+    "--no-sandbox": true,
+    "--disable-web-security": false,
+    "--enable-automation": false,
+    "--headless": false,
+    "--headless=new": false
+  },
+  "actual_mode": "HEADFUL",
+  "events": [
+    {
+      "event": "PAGE_NAVIGATION_STARTED",
+      "elapsed_ms": 0.06,
+      "site_rejection": false
+    },
+    {
+      "event": "PAGE_LOADED",
+      "elapsed_ms": 1496.03,
+      "site_rejection": false
+    },
+    {
+      "event": "NETWORK_REQUEST",
+      "elapsed_ms": 1506.33,
+      "endpoint": "document",
+      "method": "GET"
+    },
+    {
+      "event": "NETWORK_RESPONSE",
+      "elapsed_ms": 1507.03,
+      "endpoint": "document",
+      "http_status": 200,
+      "method": "GET"
+    },
+    {
+      "event": "NETWORK_REQUEST",
+      "elapsed_ms": 1508.08,
+      "endpoint": "widget_script",
+      "method": "GET"
+    },
+    {
+      "event": "NETWORK_RESPONSE",
+      "elapsed_ms": 1508.57,
+      "endpoint": "widget_script",
+      "http_status": 200,
+      "method": "GET"
+    },
+    {
+      "event": "NETWORK_REQUEST",
+      "elapsed_ms": 1509.19,
+      "endpoint": "widget_script",
+      "method": "GET"
+    },
+    {
+      "event": "NETWORK_REQUEST",
+      "elapsed_ms": 1509.92,
+      "endpoint": "widget_script",
+      "method": "GET"
+    },
+    {
+      "event": "NETWORK_RESPONSE",
+      "elapsed_ms": 1510.51,
+      "endpoint": "widget_script",
+      "http_status": 200,
+      "method": "GET"
+    },
+    {
+      "event": "NETWORK_RESPONSE",
+      "elapsed_ms": 1511.0,
+      "endpoint": "widget_script",
+      "http_status": 200,
+      "method": "GET"
+    },
+    {
+      "event": "WIDGET_DETECTED",
+      "elapsed_ms": 1599.65,
+      "site_rejection": false
+    },
+    {
+      "event": "CHECKBOX_LOCATED",
+      "elapsed_ms": 1633.3,
+      "site_rejection": false
+    },
+    {
+      "event": "BEFORE_CHECKBOX_CLICK",
+      "elapsed_ms": 1685.23,
+      "site_rejection": false
+    },
+    {
+      "event": "AFTER_CHECKBOX_CLICK",
+      "elapsed_ms": 1761.17,
+      "site_rejection": false
+    },
+    {
+      "event": "NETWORK_REQUEST",
+      "elapsed_ms": 2613.91,
+      "endpoint": "challenge_create",
+      "method": "POST"
+    },
+    {
+      "event": "CHALLENGE_REQUEST_OBSERVED",
+      "elapsed_ms": 2614.29,
+      "endpoint": "challenge_create",
+      "method": "POST"
+    },
+    {
+      "event": "NETWORK_RESPONSE",
+      "elapsed_ms": 3200.76,
+      "endpoint": "challenge_create",
+      "http_status": 201,
+      "method": "POST"
+    },
+    {
+      "event": "NETWORK_REQUEST",
+      "elapsed_ms": 3201.79,
+      "endpoint": "widget_script",
+      "method": "GET"
+    },
+    {
+      "event": "NETWORK_RESPONSE",
+      "elapsed_ms": 3202.83,
+      "endpoint": "widget_script",
+      "http_status": 200,
+      "method": "GET"
+    },
+    {
+      "event": "CHALLENGE_ID_OBSERVED",
+      "elapsed_ms": 3219.74,
+      "site_rejection": false
+    },
+    {
+      "event": "NETWORK_REQUEST",
+      "elapsed_ms": 7040.28,
+      "endpoint": "challenge_answer",
+      "method": "POST"
+    },
+    {
+      "event": "NETWORK_RESPONSE",
+      "elapsed_ms": 7304.94,
+      "endpoint": "challenge_answer",
+      "http_status": 200,
+      "method": "POST"
+    },
+    {
+      "event": "CAPTCHA_SOLVED",
+      "elapsed_ms": 7887.52,
+      "site_rejection": false
+    },
+    {
+      "event": "NETWORK_REQUEST",
+      "elapsed_ms": 8288.09,
+      "endpoint": "login",
+      "method": "POST"
+    },
+    {
+      "event": "LOGIN_SUBMITTED",
+      "elapsed_ms": 8288.75
+    },
+    {
+      "event": "NETWORK_RESPONSE",
+      "elapsed_ms": 9801.33,
+      "endpoint": "login",
+      "http_status": 200,
+      "method": "POST"
+    },
+    {
+      "event": "LOGIN_RESPONSE_OBSERVED",
+      "elapsed_ms": 9806.49,
+      "http_status": 200
+    }
+  ],
+  "environment_after_navigation": {
+    "browser_version": "156.0.8078.79",
+    "driver_version": "156.0.8078.80",
+    "platform": "",
+    "accept_insecure_certs": false,
+    "page_load_strategy": "normal",
+    "proxy_configured": false,
+    "websocket_capability": false,
+    "selenium": "4.52.0",
+    "hardware_concurrency": 16,
+    "language": "en-US",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "secure_context": true,
+    "timezone": "Asia/Tehran",
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "viewport": [
+      1854,
+      905
+    ],
+    "webdriver": false,
+    "webgl": true
+  },
+  "network_observer_available": true,
+  "challenge_source": "widget_getChallengeID",
+  "challenge_id": "696236271627749589523224630805",
+  "verification_state": "ACCEPTED",
+  "verification_evidence": "browser_login_http_200_expected_msg",
+  "resource_failure_codes": [],
+  "severe_console_count": 0,
+  "webdriver_quit": true,
+  "temporary_profile_removed": true,
+  "challenge_create_requests": 1,
+  "challenge_create_response_statuses": [
+    201
+  ],
+  "challenge_answer_requests": 1,
+  "challenge_answer_response_statuses": [
+    200
+  ],
+  "login_requests": 1,
+  "login_response_statuses": [
+    200
+  ],
+  "finished_utc": "2026-11-05T20:44:50.672340+00:00"
+}

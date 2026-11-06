@@ -42,7 +42,3 @@ class RunsPage(BaseModel):
     total: int
     limit: int
     offset: int
-
-
-class ApiError(BaseModel):
-    detail: str

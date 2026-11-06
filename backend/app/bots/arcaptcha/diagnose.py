@@ -50,7 +50,6 @@ def observe_case(settings: Settings, mode: BrowserMode, click: bool, seconds: fl
         if click:
             page.click_checkbox()
         end = time.monotonic() + seconds
-        # A deliberately bounded observation window, not a retry or fixed element sleep.
         while time.monotonic() < end:
             page.network.poll()
             page.raise_if_blocked()

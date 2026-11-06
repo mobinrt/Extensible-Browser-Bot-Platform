@@ -67,7 +67,7 @@ class BotRunError(Exception):
 @dataclass
 class BotContext:
     mode: BrowserMode
-    driver: Any  # Browser driver abstraction; Selenium is injected by infrastructure.
+    driver: Any
     deadline: datetime
     record_challenge: Callable[[str], None]
     report_manual_wait: Callable[[], None]

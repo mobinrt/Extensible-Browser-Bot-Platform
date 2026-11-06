@@ -111,7 +111,6 @@ def test_negative_verification_is_not_success(monkeypatch):
 
 
 def test_uncertain_verification_is_not_success(monkeypatch):
-    # Elapse time deterministically without waiting in real time.
     ticks = iter([0, 0, 2])
     monkeypatch.setattr(module.time, "monotonic", lambda: next(ticks))
     error, _ = run_fake(monkeypatch, FakePage(observed=None))
@@ -150,3 +149,20 @@ def test_challenge_commit_precedes_credentials(monkeypatch):
     result, saved = run_fake(monkeypatch, page)
     assert result.code == "CREDENTIAL_ENTRY_FAILED" and saved == ["challenge-123"]
     assert page.closed and not page.submitted
+
+
+def test_challenge_overlay_is_completed_before_typing(monkeypatch):
+    page = FakePage(solved=False)
+    def complete():
+        assert not page.filled
+        page.solved = True
+        return True
+    page.wait_for_solved = complete
+    original_fill = page.fill_credentials
+    def fill(*args):
+        assert page.solved
+        original_fill(*args)
+    page.fill_credentials = fill
+    result, saved = run_fake(monkeypatch, page, BrowserMode.HEADFUL)
+    assert saved == ["challenge-123"] and page.filled
+    assert result.status is RunStatus.SUCCEEDED

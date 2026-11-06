@@ -46,10 +46,8 @@ class ArcaptchaBot:
             challenge_id = page.read_challenge_id()
             if not challenge_id:
                 raise BotRunError("CHALLENGE_ID_UNAVAILABLE", "challenge")
-            ctx.record_challenge(challenge_id)  # independent commit BEFORE later steps
+            ctx.record_challenge(challenge_id)
             ctx.check_deadline()
-            if not page.submission_observed():
-                page.fill_credentials(settings.demo_username, settings.demo_password.get_secret_value())
             if not page.wait_for_solved() and not page.submission_observed():
                 if ctx.mode is BrowserMode.HEADLESS:
                     raise BotRunError("CAPTCHA_REQUIRES_HUMAN", "captcha", RunStatus.BLOCKED)
@@ -61,12 +59,15 @@ class ArcaptchaBot:
                     page.raise_if_blocked()
                     if page.submission_observed() or page.is_solved():
                         break
-                    time.sleep(0.25)  # bounded human state polling
+                    time.sleep(0.25)
                 else:
                     raise BotRunError("MANUAL_CHALLENGE_INCOMPLETE", "captcha", RunStatus.TIMED_OUT)
                 ctx.report_running()
             ctx.check_deadline()
             if not page.submission_observed():
+                # A genuine challenge may overlay the form. Complete it normally
+                # before typing; the ID is already durably recorded above.
+                page.fill_credentials(settings.demo_username, settings.demo_password.get_secret_value())
                 page.submit()
             end = time.monotonic() + settings.selenium_wait_seconds
             while time.monotonic() < end:
