@@ -10,7 +10,12 @@ jobs:
           POSTGRES_USER: bots
           POSTGRES_PASSWORD: test
           POSTGRES_DB: bot_test
-        options: --health-cmd 'pg_isready -U bots -d bot_test' --health-interval 5s --health-retries 10
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd="pg_isready -U bots -d bot_test"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=10
       selenium:
         image: selenium/standalone-chrome:4.51.0-20261010
         ports: ['4444:4444']
